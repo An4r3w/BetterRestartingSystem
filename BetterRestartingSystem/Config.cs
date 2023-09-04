@@ -1,4 +1,4 @@
-﻿using Exiled.API.Interfaces;
+using Exiled.API.Interfaces;
 using System.ComponentModel;
 
 namespace BetterRestartingSystem
@@ -10,15 +10,6 @@ namespace BetterRestartingSystem
 
         [Description("Enable debug mode.")]
         public bool Debug { get; set; } = false;
-
-        [Description("Should lights go off after the warhead stopped?")]
-        public bool TurnOffLights { get; set; } = true;
-
-        [Description("If enabled, specifies how much time after stopping the warhead the lights should go off.")]
-        public float TurnOffLightsDelay { get; set; } = 20;
-
-        [Description("If enabled, specifies how long the lights should stay off.")]
-        public float TurnOffLightsTime { get; set; } = 15;
 
         [Description("Broadcast shown while the systems are restarting.")]
         public Exiled.API.Features.Broadcast WhileRestartingBroadcast { get; set; } = new Exiled.API.Features.Broadcast()
