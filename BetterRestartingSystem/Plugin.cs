@@ -1,4 +1,5 @@
-﻿using Warhead = Exiled.Events.Handlers.Warhead;
+using Warhead = Exiled.Events.Handlers.Warhead;
+using Server = Exiled.Events.Handlers.Server;
 using Exiled.API.Features;
 using System;
 using Exiled.API.Enums;
@@ -16,7 +17,7 @@ namespace BetterRestartingSystem
 
         public override string Prefix { get; } = "BetterRestartingSystem";
 
-        public override Version Version => new Version(1, 0, 0);
+        public override Version Version => new Version(2, 0, 0);
 
         public override Version RequiredExiledVersion => new Version(7, 0, 0);
 
@@ -31,6 +32,9 @@ namespace BetterRestartingSystem
 
             Warhead.Stopping += events.OnStopping;
             Warhead.Detonated += events.OnDetonated;
+            Server.EndingRound += events.OnRoundEnding;
+            Server.RoundStarted += events.OnRoundStarted;
+            Server.RestartingRound += events.OnRestartingRound;
         }
 
         public override void OnDisabled()
@@ -39,6 +43,9 @@ namespace BetterRestartingSystem
 
             Warhead.Stopping -= events.OnStopping;
             Warhead.Detonated -= events.OnDetonated;
+            Server.EndingRound -= events.OnRoundEnding;
+            Server.RoundStarted -= events.OnRoundStarted;
+            Server.RestartingRound -= events.OnRestartingRound;
 
             events = null;
         }
