@@ -1,4 +1,5 @@
 using Exiled.API.Features;
+using Exiled.API.Features.Doors;
 using Exiled.Events.EventArgs.Server;
 using Exiled.Events.EventArgs.Warhead;
 using MEC;
@@ -49,6 +50,8 @@ namespace BetterRestartingSystem
                 {
                     if (randomValue <= stopProbability)
                     {
+                        Warhead.IsLocked = true;
+
                         Cassie.MessageTranslated(message: Plugin.Singleton.Config.FailCassie, translation: Plugin.Singleton.Config.FailCassieTranslation, isNoisy: false);
                         Map.Broadcast(Plugin.Singleton.Config.FailBroadcast);
 
@@ -58,6 +61,15 @@ namespace BetterRestartingSystem
                         {
                             Color color = new Color(Plugin.Singleton.Config.RoomsColorR / 255f, Plugin.Singleton.Config.RoomsColorG / 255f, Plugin.Singleton.Config.RoomsColorB / 255f);
                             controller.NetworkOverrideColor = color;
+                        }
+
+                        foreach (Door doors in Door.List)
+                        {
+                            if (doors.IsElevator == false && doors.Type != Exiled.API.Enums.DoorType.HID)
+                            {
+                                doors.IsOpen = true;
+                                doors.Lock(time: Plugin.Singleton.Config.TimeForDetonation, lockType: Exiled.API.Enums.DoorLockType.Warhead);
+                            }
                         }
 
                         detonationCoroutine = Timing.CallDelayed(Plugin.Singleton.Config.TimeForDetonation, () => { Warhead.Detonate(); });
