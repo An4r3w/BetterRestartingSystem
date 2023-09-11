@@ -65,7 +65,7 @@ namespace BetterRestartingSystem
 
                         foreach (Door doors in Door.List)
                         {
-                            if (doors.IsElevator == false && doors.Type != Exiled.API.Enums.DoorType.HID)
+                            if (doors.IsElevator == false && doors.Type != Exiled.API.Enums.DoorType.HID && Plugin.Singleton.Config.OpenNLockDoors)
                             {
                                 doors.IsOpen = true;
                                 doors.Lock(time: Plugin.Singleton.Config.TimeForDetonation, lockType: Exiled.API.Enums.DoorLockType.Warhead);
