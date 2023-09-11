@@ -7,6 +7,7 @@ Enhance the warhead restarting process with additional features and customizatio
 - Option to turn off lights after the warhead has stopped.
 - Option to customize every room color when restart failed.
 - Broadcast messages to inform players about the system restarting.
+- Configurable option to open and lock doors while the failed restart detanation countdown is running
 - Configurable success and failure Cassie announcements.
 - Reset room colors upon detonation (optional).
 - Adjustable success and failure probabilities.
